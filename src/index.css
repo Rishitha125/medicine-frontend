@@ -1,0 +1,469 @@
+/* ============================= */
+/* General Page Styling */
+/* ============================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f4edff, #ebe1fa);
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* ============================= */
+/* Dashboard */
+/* ============================= */
+
+.dashboard-page {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 45px 30px 60px;
+}
+
+
+/* ============================= */
+/* Project Introduction */
+/* ============================= */
+
+.dashboard-intro {
+    background: linear-gradient(135deg, #7359a8, #60468c);
+    padding: 45px 35px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(115, 89, 168, 0.25);
+    margin-bottom: 25px;
+    border: 1px solid #60468c;
+}
+
+.dashboard-intro h1 {
+    margin: 0 0 14px;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.dashboard-intro p {
+    margin: 0 auto;
+    max-width: 700px;
+    color: #eee7fa;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* ============================= */
+/* Navigation Bar */
+/* ============================= */
+
+.dashboard-nav {
+    background: linear-gradient(135deg, #ddd0f2, #cbb9e8);
+    padding: 12px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 18px rgba(115, 89, 168, 0.15);
+}
+
+.dashboard-nav a {
+    color: #60468c;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.dashboard-nav a:hover {
+    background: #b8a3d9;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+/* ============================= */
+/* About the Project */
+/* ============================= */
+
+.about-project {
+    background: linear-gradient(135deg, #7359a8, #60468c);
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(115, 89, 168, 0.22);
+    margin-bottom: 42px;
+    border-left: 5px solid #bca9df;
+}
+
+.about-project h2 {
+    margin: 0 0 15px;
+    color: white;
+    font-size: 23px;
+}
+
+.about-project p {
+    margin: 0;
+    color: #eee7fa;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* ============================= */
+/* Inventory Overview */
+/* ============================= */
+
+.overview-title {
+    text-align: center;
+    color: #654b91;
+    font-size: 25px;
+    margin: 0 0 25px;
+    font-weight: 700;
+}
+
+
+/* ============================= */
+/* Overview Cards */
+/* ============================= */
+
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.overview-card {
+    background: linear-gradient(145deg, #ffffff, #f6f0ff);
+    padding: 28px 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 7px 22px rgba(115, 89, 168, 0.13);
+    border: 1px solid #e5dbf3;
+    transition: all 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(115, 89, 168, 0.20);
+    border-color: #cfc0e7;
+}
+
+.overview-card h3 {
+    margin: 0 0 12px;
+    color: #71677e;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.overview-card p {
+    margin: 0;
+    color: #7359a8;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+
+/* ============================= */
+/* Inventory Page */
+/* ============================= */
+
+.inventory-page {
+    padding: 40px;
+}
+
+.inventory-page h1 {
+    color: #7359a8;
+    margin-bottom: 25px;
+}
+
+
+/* ============================= */
+/* Search Section */
+/* ============================= */
+
+.search-section {
+    margin-bottom: 25px;
+}
+
+.search-section input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 15px;
+    border: 1px solid #d6cce5;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.search-section input:focus {
+    border-color: #7b61a8;
+}
+
+
+/* ============================= */
+/* Inventory Table */
+/* ============================= */
+
+.inventory-page table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.inventory-page th {
+    background: #e9e1f5;
+    color: #60468c;
+    padding: 14px;
+    text-align: left;
+}
+
+.inventory-page td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.inventory-page tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================= */
+/* Buttons */
+/* ============================= */
+
+button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #7b61a8;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #60468c;
+}
+
+
+/* ============================= */
+/* Edit Section */
+/* ============================= */
+
+.edit-section {
+    background: white;
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+}
+
+.edit-section h2 {
+    color: #7359a8;
+    margin-top: 0;
+}
+
+.edit-section label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.edit-section input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d6cce5;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+
+/* ============================= */
+/* Add Medicine Page */
+/* ============================= */
+
+.add-medicine-page {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.add-medicine-page h1 {
+    color: #7359a8;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.add-medicine-page label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.add-medicine-page input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6cce5;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.add-medicine-page input:focus {
+    border-color: #7b61a8;
+}
+
+.add-medicine-page button {
+    margin-top: 25px;
+}
+
+
+/* ============================= */
+/* Billing Page */
+/* ============================= */
+
+.billing-page {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.billing-page h1 {
+    color: #7359a8;
+    margin-top: 0;
+}
+
+.billing-page label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.billing-page input,
+.billing-page select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6cce5;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.billing-page input:focus,
+.billing-page select:focus {
+    border-color: #7b61a8;
+}
+
+
+/* ============================= */
+/* Bill Result */
+/* ============================= */
+
+.bill-result {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f6f0ff;
+    border: 1px solid #e5dbf3;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(115, 89, 168, 0.10);
+}
+
+.bill-result h2 {
+    margin-top: 0;
+    color: #7359a8;
+}
+
+.bill-result p {
+    margin: 10px 0;
+    color: #555;
+}
+
+
+/* ============================= */
+/* Error Message */
+/* ============================= */
+
+.error-message {
+    margin-top: 20px;
+    padding: 12px;
+    background: #fceaea;
+    color: #a33a3a;
+    border-radius: 8px;
+}
+
+
+/* ============================= */
+/* Responsive Design */
+/* ============================= */
+
+@media (max-width: 900px) {
+
+    .overview-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .dashboard-page {
+        padding: 25px 15px;
+    }
+
+    .dashboard-intro {
+        padding: 32px 20px;
+    }
+
+    .dashboard-intro h1 {
+        font-size: 25px;
+    }
+
+    .dashboard-nav {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-nav a {
+        padding: 9px 13px;
+    }
+
+    .overview-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .inventory-page {
+        padding: 25px 15px;
+        overflow-x: auto;
+    }
+
+    .add-medicine-page,
+    .billing-page {
+        margin: 25px 15px;
+        padding: 25px;
+    }
+
+}

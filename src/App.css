@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f0fa;
+  color: #333;
+}
+
+.app {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+/* Header */
+
+header {
+  background-color: #8e7cc3;
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+header p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Sections */
+
+.form-section,
+.table-section {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(100, 80, 130, 0.12);
+}
+
+h2 {
+  margin-top: 0;
+  color: #7359a8;
+}
+
+/* Form */
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 7px;
+  font-weight: bold;
+  color: #4d405f;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #c9bde0;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fcfaff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #8e7cc3;
+  box-shadow: 0 0 4px rgba(142, 124, 195, 0.3);
+}
+
+/* Add / Update Button */
+
+.add-button {
+  grid-column: span 2;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #8e7cc3;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #7359a8;
+}
+
+/* Cancel Button */
+
+.cancel-button {
+  grid-column: span 2;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #9b8fa8;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #776b84;
+}
+
+/* Table */
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #e9e1f5;
+  color: #654b91;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0d8eb;
+}
+
+tr:hover {
+  background-color: #faf7fd;
+}
+
+/* Empty Table */
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  padding: 25px;
+}
+
+/* Status */
+
+.status {
+  padding: 5px 9px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.available {
+  background-color: #e4f3e7;
+  color: #357a46;
+}
+
+.out-of-stock {
+  background-color: #f5d8dc;
+  color: #9b3d4a;
+}
+
+/* Edit Button */
+
+.edit-button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #8e7cc3;
+  color: white;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.edit-button:hover {
+  background-color: #7359a8;
+}
+
+/* Delete Button */
+
+.delete-button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c06c84;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #a9516b;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-button,
+  .cancel-button {
+    grid-column: span 1;
+  }
+
+  .app {
+    width: 95%;
+  }
+
+}
