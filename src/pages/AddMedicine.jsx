@@ -1,9 +1,9 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function AddMedicine() {
-
     const [medicine, setMedicine] = useState({
         name: "",
         category: "",
@@ -13,6 +13,8 @@ function AddMedicine() {
     });
 
     const [message, setMessage] = useState("");
+
+    const API_URL = "https://medicine-inventory-backend-0htm.onrender.com/api/medicines";
 
     const handleChange = (e) => {
         setMedicine({
@@ -25,16 +27,13 @@ function AddMedicine() {
         e.preventDefault();
 
         try {
-            await axios.post(
-                "http://localhost:8080/api/medicines",
-                {
-                    name: medicine.name,
-                    category: medicine.category,
-                    availableStock: Number(medicine.availableStock),
-                    price: Number(medicine.price),
-                    expiryDate: medicine.expiryDate
-                }
-            );
+            await axios.post(API_URL, {
+                name: medicine.name,
+                category: medicine.category,
+                availableStock: Number(medicine.availableStock),
+                price: Number(medicine.price),
+                expiryDate: medicine.expiryDate
+            });
 
             setMessage("Medicine added successfully.");
 
@@ -45,47 +44,25 @@ function AddMedicine() {
                 price: "",
                 expiryDate: ""
             });
-
         } catch (error) {
-            console.error(error);
+            console.error("Error adding medicine:", error);
             setMessage("Error adding medicine.");
         }
     };
 
     return (
         <div className="add-medicine-page">
-
-            {/* ============================= */}
-            {/* Navigation */}
-            {/* ============================= */}
-
             <nav className="dashboard-nav">
-
-                <Link to="/">
-                    Dashboard
-                </Link>
-
-                <Link to="/inventory">
-                    Inventory
-                </Link>
-
-                <Link to="/add-medicine">
-                    Add Medicine
-                </Link>
-
-                <Link to="/billing">
-                    Billing
-                </Link>
-
+                <Link to="/">Dashboard</Link>
+                <Link to="/inventory">Inventory</Link>
+                <Link to="/add-medicine">Add Medicine</Link>
+                <Link to="/billing">Billing</Link>
             </nav>
-
 
             <h1>Add Medicine</h1>
 
             <form onSubmit={handleSubmit}>
-
                 <label>Medicine Name</label>
-
                 <input
                     type="text"
                     name="name"
@@ -95,9 +72,7 @@ function AddMedicine() {
                     required
                 />
 
-
                 <label>Category</label>
-
                 <input
                     type="text"
                     name="category"
@@ -107,9 +82,7 @@ function AddMedicine() {
                     required
                 />
 
-
                 <label>Adding Stock</label>
-
                 <input
                     type="number"
                     name="availableStock"
@@ -120,9 +93,7 @@ function AddMedicine() {
                     required
                 />
 
-
                 <label>Price of One Tablet (₹)</label>
-
                 <input
                     type="number"
                     name="price"
@@ -134,9 +105,7 @@ function AddMedicine() {
                     required
                 />
 
-
                 <label>Expiry Date</label>
-
                 <input
                     type="date"
                     name="expiryDate"
@@ -145,16 +114,10 @@ function AddMedicine() {
                     required
                 />
 
-
-                <button type="submit">
-                    Add Medicine
-                </button>
-
+                <button type="submit">Add Medicine</button>
             </form>
 
-
             {message && <p>{message}</p>}
-
         </div>
     );
 }

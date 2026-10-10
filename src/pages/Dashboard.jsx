@@ -15,7 +15,7 @@ function Dashboard() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8080/api/medicines"
+                "https://medicine-inventory-backend-0htm.onrender.com/api/medicines"
             );
 
             setMedicines(response.data);

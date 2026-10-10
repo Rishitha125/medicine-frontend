@@ -1,21 +1,19 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Inventory() {
-
     const [medicines, setMedicines] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [editingMedicine, setEditingMedicine] = useState(null);
 
+    const API_URL = "https://medicine-inventory-backend-0htm.onrender.com/api/medicines";
+
     const fetchMedicines = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:8080/api/medicines"
-            );
-
+            const response = await axios.get(API_URL);
             setMedicines(response.data);
-
         } catch (error) {
             console.error("Error fetching medicines:", error);
         }
@@ -26,44 +24,28 @@ function Inventory() {
     }, []);
 
     const getStatus = (stock) => {
-
-        if (stock === 0) {
-            return "Out of Stock";
-        }
-
-        if (stock <= 10) {
-            return "Low Stock";
-        }
-
+        if (stock === 0) return "Out of Stock";
+        if (stock <= 10) return "Low Stock";
         return "In Stock";
     };
 
     const handleDelete = async (id) => {
-
         try {
-            await axios.delete(
-                `http://localhost:8080/api/medicines/${id}`
-            );
-
+            await axios.delete(`${API_URL}/${id}`);
             fetchMedicines();
-
         } catch (error) {
             console.error("Error deleting medicine:", error);
         }
     };
 
     const handleEdit = (medicine) => {
-        setEditingMedicine({
-            ...medicine
-        });
+        setEditingMedicine({ ...medicine });
     };
 
     const handleUpdate = async () => {
-
         try {
-
             await axios.put(
-                `http://localhost:8080/api/medicines/${editingMedicine.id}`,
+                `${API_URL}/${editingMedicine.id}`,
                 {
                     name: editingMedicine.name,
                     category: editingMedicine.category,
@@ -74,71 +56,38 @@ function Inventory() {
             );
 
             setEditingMedicine(null);
-
             fetchMedicines();
-
         } catch (error) {
             console.error("Error updating medicine:", error);
         }
     };
 
     const filteredMedicines = medicines.filter((medicine) =>
-        medicine.name
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
+        medicine.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div className="inventory-page">
-
-            {/* ============================= */}
-            {/* Navigation */}
-            {/* ============================= */}
-
             <nav className="dashboard-nav">
-
-                <Link to="/">
-                    Dashboard
-                </Link>
-
-                <Link to="/inventory">
-                    Inventory
-                </Link>
-
-                <Link to="/add-medicine">
-                    Add Medicine
-                </Link>
-
-                <Link to="/billing">
-                    Billing
-                </Link>
-
+                <Link to="/">Dashboard</Link>
+                <Link to="/inventory">Inventory</Link>
+                <Link to="/add-medicine">Add Medicine</Link>
+                <Link to="/billing">Billing</Link>
             </nav>
-
 
             <h1>Medicine Inventory</h1>
 
-
-            {/* Search */}
-
             <div className="search-section">
-
                 <input
                     type="text"
                     placeholder="Search medicine by name..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-
             </div>
 
-
-            {/* Inventory Table */}
-
             <table>
-
                 <thead>
-
                     <tr>
                         <th>Name</th>
                         <th>Category</th>
@@ -148,96 +97,42 @@ function Inventory() {
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
-
                 </thead>
 
                 <tbody>
-
                     {filteredMedicines.length > 0 ? (
-
                         filteredMedicines.map((medicine) => (
-
                             <tr key={medicine.id}>
-
+                                <td>{medicine.name}</td>
+                                <td>{medicine.category}</td>
+                                <td>₹{medicine.price}</td>
+                                <td>{medicine.expiryDate}</td>
+                                <td>{medicine.availableStock}</td>
+                                <td>{getStatus(medicine.availableStock)}</td>
                                 <td>
-                                    {medicine.name}
-                                </td>
-
-                                <td>
-                                    {medicine.category}
-                                </td>
-
-                                <td>
-                                    ₹{medicine.price}
-                                </td>
-
-                                <td>
-                                    {medicine.expiryDate}
-                                </td>
-
-                                <td>
-                                    {medicine.availableStock}
-                                </td>
-
-                                <td>
-                                    {getStatus(
-                                        medicine.availableStock
-                                    )}
-                                </td>
-
-                                <td>
-
-                                    <button
-                                        onClick={() =>
-                                            handleEdit(medicine)
-                                        }
-                                    >
+                                    <button onClick={() => handleEdit(medicine)}>
                                         Edit
                                     </button>
 
-                                    <button
-                                        onClick={() =>
-                                            handleDelete(medicine.id)
-                                        }
-                                    >
+                                    <button onClick={() => handleDelete(medicine.id)}>
                                         Delete
                                     </button>
-
                                 </td>
-
                             </tr>
-
                         ))
-
                     ) : (
-
                         <tr>
-
-                            <td colSpan="7">
-                                No medicines found.
-                            </td>
-
+                            <td colSpan="7">No medicines found.</td>
                         </tr>
-
                     )}
-
                 </tbody>
-
             </table>
 
-
-            {/* Edit Section */}
-
             {editingMedicine && (
-
                 <div className="edit-section">
-
                     <h2>Edit Medicine</h2>
 
-                    <label>
-                        Medicine Name
-                    </label>
-
+                    <label>Medicine Name</label>
                     <input
                         type="text"
                         value={editingMedicine.name}
@@ -249,11 +144,7 @@ function Inventory() {
                         }
                     />
 
-
-                    <label>
-                        Category
-                    </label>
-
+                    <label>Category</label>
                     <input
                         type="text"
                         value={editingMedicine.category}
@@ -265,11 +156,7 @@ function Inventory() {
                         }
                     />
 
-
-                    <label>
-                        Price of One Tablet
-                    </label>
-
+                    <label>Price of One Tablet</label>
                     <input
                         type="number"
                         value={editingMedicine.price}
@@ -281,11 +168,7 @@ function Inventory() {
                         }
                     />
 
-
-                    <label>
-                        Expiry Date
-                    </label>
-
+                    <label>Expiry Date</label>
                     <input
                         type="date"
                         value={editingMedicine.expiryDate}
@@ -297,11 +180,7 @@ function Inventory() {
                         }
                     />
 
-
-                    <label>
-                        Available Stock
-                    </label>
-
+                    <label>Available Stock</label>
                     <input
                         type="number"
                         value={editingMedicine.availableStock}
@@ -313,23 +192,12 @@ function Inventory() {
                         }
                     />
 
-
-                    <button onClick={handleUpdate}>
-                        Save Changes
-                    </button>
-
-                    <button
-                        onClick={() =>
-                            setEditingMedicine(null)
-                        }
-                    >
+                    <button onClick={handleUpdate}>Save Changes</button>
+                    <button onClick={() => setEditingMedicine(null)}>
                         Cancel
                     </button>
-
                 </div>
-
             )}
-
         </div>
     );
 }

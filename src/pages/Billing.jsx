@@ -1,106 +1,79 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Billing() {
-
     const [medicines, setMedicines] = useState([]);
-
     const [medicineName, setMedicineName] = useState("");
     const [quantity, setQuantity] = useState("");
-
     const [bill, setBill] = useState(null);
     const [message, setMessage] = useState("");
+
+    const API_URL = "https://medicine-inventory-backend-0htm.onrender.com/api/medicines";
+    const BILLING_URL = "https://medicine-inventory-backend-0htm.onrender.com/api/billing";
 
     useEffect(() => {
         fetchMedicines();
     }, []);
 
     const fetchMedicines = async () => {
-
         try {
-
-            const response = await axios.get(
-                "http://localhost:8080/api/medicines"
-            );
-
+            const response = await axios.get(API_URL);
             setMedicines(response.data);
-
         } catch (error) {
-
             console.error("Error fetching medicines:", error);
-
+            setMessage("Unable to load medicines. Please try again.");
         }
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         setMessage("");
         setBill(null);
 
         try {
-
-            const response = await axios.post(
-                "http://localhost:8080/api/billing",
-                {
-                    medicineName: medicineName,
-                    quantity: Number(quantity)
-                }
-            );
+            const response = await axios.post(BILLING_URL, {
+                medicineName: medicineName,
+                quantity: Number(quantity)
+            });
 
             setBill(response.data);
-
             setQuantity("");
-
-            fetchMedicines();
-
+            await fetchMedicines();
         } catch (error) {
-
-            console.error(error);
+            console.error("Error generating bill:", error);
 
             if (error.response && error.response.data) {
-                setMessage(error.response.data);
+                const errorData = error.response.data;
+                setMessage(
+                    typeof errorData === "string"
+                        ? errorData
+                        : errorData.message || "Unable to process the bill."
+                );
             } else {
-                setMessage("Unable to process the bill.");
+                setMessage("Unable to process the bill. Please try again.");
             }
         }
     };
 
+    const selectedMedicine = medicines.find(
+        (medicine) => medicine.name === medicineName
+    );
+
     return (
         <div className="billing-page">
-
-            {/* ============================= */}
-            {/* Navigation */}
-            {/* ============================= */}
-
             <nav className="dashboard-nav">
-
-                <Link to="/">
-                    Dashboard
-                </Link>
-
-                <Link to="/inventory">
-                    Inventory
-                </Link>
-
-                <Link to="/add-medicine">
-                    Add Medicine
-                </Link>
-
-                <Link to="/billing">
-                    Billing
-                </Link>
-
+                <Link to="/">Dashboard</Link>
+                <Link to="/inventory">Inventory</Link>
+                <Link to="/add-medicine">Add Medicine</Link>
+                <Link to="/billing">Billing</Link>
             </nav>
-
 
             <h1>Medicine Billing</h1>
 
-
             <form onSubmit={handleSubmit}>
-
                 <label>Medicine Name</label>
 
                 <select
@@ -108,38 +81,22 @@ function Billing() {
                     onChange={(e) => setMedicineName(e.target.value)}
                     required
                 >
-
-                    <option value="">
-                        Select Medicine
-                    </option>
+                    <option value="">Select Medicine</option>
 
                     {medicines.map((medicine) => (
-
-                        <option
-                            key={medicine.id}
-                            value={medicine.name}
-                        >
+                        <option key={medicine.id} value={medicine.name}>
                             {medicine.name}
                         </option>
-
                     ))}
-
                 </select>
-
 
                 <label>Category</label>
 
                 <input
                     type="text"
-                    value={
-                        medicines.find(
-                            (medicine) =>
-                                medicine.name === medicineName
-                        )?.category || ""
-                    }
+                    value={selectedMedicine?.category || ""}
                     readOnly
                 />
-
 
                 <label>Quantity Requested</label>
 
@@ -152,63 +109,38 @@ function Billing() {
                     required
                 />
 
-
-                <button type="submit">
-                    Generate Bill
-                </button>
-
+                <button type="submit">Generate Bill</button>
             </form>
 
-
             {message && (
-
-                <p className="error-message">
-                    {message}
-                </p>
-
+                <p className="error-message">{message}</p>
             )}
 
-
             {bill && (
-
                 <div className="bill-result">
-
                     <h2>Bill Details</h2>
 
                     <p>
-                        <strong>Medicine:</strong>{" "}
-                        {bill.medicineName}
+                        <strong>Medicine:</strong> {bill.medicineName}
                     </p>
 
                     <p>
-                        <strong>Category:</strong>{" "}
-                        {bill.category}
+                        <strong>Category:</strong> {bill.category}
                     </p>
 
                     <p>
-                        <strong>Quantity:</strong>{" "}
-                        {bill.quantity}
+                        <strong>Quantity:</strong> {bill.quantity}
                     </p>
 
                     <p>
-                        <strong>Price per Tablet:</strong>{" "}
-                        ₹{bill.pricePerTablet}
+                        <strong>Price per Tablet:</strong> ₹{bill.pricePerTablet}
                     </p>
 
                     <p>
-                        <strong>Total Amount:</strong>{" "}
-                        ₹{bill.totalAmount}
+                        <strong>Total Amount:</strong> ₹{bill.totalAmount}
                     </p>
-
-                    <p>
-                        <strong>Remaining Stock:</strong>{" "}
-                        {bill.remainingStock}
-                    </p>
-
                 </div>
-
             )}
-
         </div>
     );
 }
